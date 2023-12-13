@@ -49,7 +49,7 @@ const RenderCards: FC<IRenderCards> = ({ data, title }): ReactElement => {
         )
     }
 
-    return <Htag level={2} color='darkGray' className='cards-title'>{title}</Htag>
+    return <Htag level={2} color='ghost' className='cards-title'>{title}</Htag>
 }
 
 export default RenderCards
