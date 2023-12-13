@@ -1,0 +1,26 @@
+.header {
+	position: sticky;
+	z-index: 30;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+.navbar {
+	height: 4rem;
+	padding: 0.5rem 0;
+
+	.navbar-box {
+		padding: 10px 30px;
+		border-radius: 5rem;
+		background: transparent;
+		background-blend-mode: multiply;
+		box-shadow: $shadowGray-sm;
+		backdrop-filter: blur(4px);
+	}
+
+	@media (min-width: $responsive-md) {
+		height: 5rem;
+		padding: 1rem 2rem;
+	}
+}

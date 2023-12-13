@@ -1,0 +1,64 @@
+.iconButton {
+	display: block;
+	object-fit: contain;
+}
+
+.button-primary {
+	height: 45px;
+	width: 120px;
+	background-color: $bgColorPrimary;
+	box-shadow: $shadowGray-xl;
+
+	&:hover {
+		background-color: rgb(0 0 0 / 70%);
+		box-shadow: $shadowGray-xxl;
+	}
+
+	&:disabled {
+		background-color: rgb(0 0 0 / 70%);
+		box-shadow: none;
+		cursor: not-allowed;
+	}
+
+	@media (max-width: $responsive-md) {
+		width: 100%;
+	}
+}
+
+.button-secondary {
+	height: 40px;
+	width: 180px;
+	background-color: $bgColorTheme;
+
+	&:hover {
+		background-color: rgb(190 24 93 / 70%);
+		box-shadow: $shadowGray-xl;
+	}
+
+	&:disabled {
+		background-color: rgb(244 114 182 / 70%);
+		box-shadow: none;
+		cursor: not-allowed;
+	}
+
+	@media (max-width: $responsive-md) {
+		width: 100%;
+	}
+}
+
+.button-outline {
+	height: 40px;
+	width: 180px;
+	background-color: transparent;
+	border: 2px solid $colorTheme;
+	color: $colorTheme;
+
+	&:hover {
+		background-color: rgb(190 24 93 / 70%);
+		color: $colorWhite;
+	}
+
+	@media (max-width: $responsive-md) {
+		width: 100%;
+	}
+}

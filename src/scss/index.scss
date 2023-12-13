@@ -1,0 +1,177 @@
+@import './base/variables';
+@import './base/typography';
+@import './base/mixins';
+@import './layer';
+
+:root {
+	font-synthesis: none;
+	text-rendering: optimizelegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	scrollbar-width: none;
+	text-size-adjust: 100%;
+}
+
+html {
+	scroll-behavior: smooth;
+	overflow-x: hidden;
+	font-family: $roboto;
+	font-weight: $font-regular;
+}
+
+body {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	background: $mainBackgroundGradient;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	margin: 0;
+	padding: 0;
+	font-family: $inter
+}
+
+.container {
+	@include container;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+ul {
+	list-style: none;
+}
+
+p {
+	margin: 0;
+	padding: 0;
+	font-family: $inter;
+	font-weight: $font-regular;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+.flex {
+	display: flex;
+}
+
+.inline {
+	display: inline;
+}
+
+.block {
+	display: block;
+}
+
+.flex-col {
+	flex-direction: column;
+}
+
+.flex-center {
+	justify-content: center;
+}
+
+.flex-between {
+	justify-content: space-between;
+}
+
+.flex-start {
+	justify-content: flex-start;
+}
+
+.items-center {
+	align-items: center;
+}
+
+.items-start {
+	align-items: start;
+}
+
+.mx-auto {
+	margin: 0 auto;
+}
+
+.w-full {
+	width: 100%;
+}
+
+.gap-05 {
+	gap: 0.5rem;
+}
+
+.gap-2 {
+	gap: 2rem;
+}
+
+.main-title {
+	@include main-title;
+}
+
+.main-subtitle {
+	@include main-subtitle;
+}
+
+.primary {
+	color: $colorPrimary;
+}
+
+.secondary {
+	color: $colorSecondary;
+}
+
+.ghost {
+	color: $ghost;
+}
+
+.transition-all {
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 180ms;
+	transition-property: all;
+}
+
+button {
+	cursor: pointer;
+	padding: 4px 12px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 6px;
+	border: none;
+	outline: none;
+	font-family: $roboto;
+	font-weight: $font-medium;
+	font-size: 15px;
+	color: $colorWhite;
+}
+
+.cards-title {
+    font-weight: $font-extraBold;
+    text-transform: uppercase;
+}
+
+input::placeholder {
+	color: $ghost;
+	font-size: 17px;
+}
+
+@media screen and (width >= 480px) {
+	.card:nth-child(7n + 1) {
+		grid-column: auto/span 2;
+		grid-row: auto/span 2;
+	}
+}
+
+.prompt::-webkit-scrollbar {
+	width: 5px;
+}
+ 
+.prompt::-webkit-scrollbar-thumb {
+	border-radius: 5px;
+	background-color: #666E75;
+}

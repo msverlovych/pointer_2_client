@@ -1,0 +1,38 @@
+.small {
+	font-size: 0.875rem; 
+	line-height: 1.25rem; 
+
+	@media (min-width: $responsive-lg) {
+		font-size: 15px;
+	}
+}
+
+.medium {
+	font-size: 16px;
+
+	@media (min-width: $responsive-md) {
+		font-size: 1.125rem; 
+		line-height: 1.75rem; 
+	}
+
+	@media (min-width: $responsive-lg) {
+		font-size: 1.25rem; 
+		line-height: 1.75rem; 
+	}
+}
+
+.large {
+	font-size: 1.125rem; 
+	line-height: 1.75rem; 
+
+	@media (min-width: $responsive-md) {
+		font-size: 1.25rem; 
+		line-height: 1.75rem; 
+	}
+
+	@media (min-width: $responsive-lg) {
+		font-size: 1.5rem; 
+		line-height: 2rem; 
+	}
+}
+

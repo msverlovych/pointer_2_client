@@ -1,0 +1,16 @@
+/* Components */
+@import '../components/Button/button';
+@import '../components/Navbar/navbar';
+@import '../components/Logo/logo';
+@import '../components/Htag/htag';
+@import '../components/Paragraph/paragraph';
+@import '../components/FormField/form-field';
+@import '../components/RadioField/radio';
+@import '../components/Loader/loader';
+@import '../components/RenderCards/render-cards';
+@import '../components/Footer/footer';
+
+/* Pages */
+@import '../pages/Home-page/home';
+@import '../pages/Post-page/post';
+@import '../pages/Not-found-page/not-found';

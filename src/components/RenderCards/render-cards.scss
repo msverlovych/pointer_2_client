@@ -1,0 +1,66 @@
+.card {
+    position: relative;
+    display: flex;
+    border-radius: 30px;
+	box-shadow: $shadowCard;
+    overflow: hidden;
+    cursor: pointer;
+	
+	&:hover {
+		box-shadow: $shadowCardHover;
+	}
+
+	&-image {
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+		border-radius: 30px;
+        transition: transform 0.3s;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+	}
+
+	&-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+		flex-direction: column;
+        display: flex;
+        max-height: 94.5%;
+        margin: 1rem;
+        padding: 1.5rem;
+        font-family: $roboto;
+        border-radius: 20px;
+        background-color:rgb(0 0 0 / 50%);
+        backdrop-filter: blur(4px);
+
+        &__title {
+            color: $colorWhite !important;
+            font-size: 20px !important;
+            font-weight: $font-medium;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        &__label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: $colorTheme;
+            color: $colorWhite;
+            font-weight: $font-medium;
+        }
+
+        &__username {
+            color: $ghost;
+        }
+	}
+}

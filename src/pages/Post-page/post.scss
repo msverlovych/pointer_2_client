@@ -1,0 +1,128 @@
+.post {
+    padding: 1.5rem 0;
+
+    @media (min-width: $responsive-md) {
+        padding: 2rem 0;
+        min-height: calc(100vh - 10rem);
+    }
+
+    @media (min-width: $responsive-lg) {
+        padding: 2rem 0;
+        min-height: calc(100vh - 11rem);
+    }
+
+    &-promo {
+        padding: 0 0.5rem;
+		text-align: center;
+
+        &__subtitle #accent-color {
+            color: $colorTheme;
+            font-weight: $font-extraBold;
+        }
+    }
+
+    &-block {
+        padding: 1rem;
+        margin: 2.5rem 0;
+        flex-direction: column;
+        display: flex;
+        align-items: flex-start;
+        gap: 3rem;
+
+        @media (min-width: $responsive-lg) {
+            flex-direction: row;
+            justify-content: space-around;
+            gap: 4rem;            
+        }
+
+        .form {
+            flex-direction: column;
+            display: flex;
+            align-items: start;
+            gap: 2.1rem;
+            max-width: 48rem;
+            width: 100%;
+        }
+
+        &__submit {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+            
+            small {
+                color: $darkGray;
+            }
+
+            @media (min-width: $responsive-md) {
+                width: auto;
+            }
+        }
+
+        .preview-image {
+            position: relative;
+            background-color: transparent;
+            justify-content: center;
+            align-items: center;
+            border-radius: 30px;
+            box-shadow: $shadowWave-lg;
+
+            img {
+                object-fit: cover;
+            }
+    
+            &__success {
+                width: auto;
+                height: 240px;
+                border-radius: 12px;
+
+                @media (min-width: $responsive-md) {
+                    width: 400px;
+                    height: 300px;
+                }
+
+                @media (min-width: $responsive-lg) {
+                    width: 530px;
+                    height: 358px;
+                }
+
+                @media (min-width: $responsive-xl) {
+                    width: 358px;
+                    height: 358px;
+                }
+            }
+    
+            &__unload {
+                opacity: 0.4;
+            }
+            
+            &__loading {
+                position: absolute;
+                inset: 0;
+                z-index: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 30px;
+                background-color: $bgGray;
+            }
+        }
+
+        .desktop {
+            display: none;
+
+            @media (min-width: $responsive-md) {
+                display: flex;
+            }
+        }
+
+        .mobile {
+            display: flex;
+
+            @media (min-width: $responsive-md) {
+                display: none;
+            }
+        }
+    }
+}

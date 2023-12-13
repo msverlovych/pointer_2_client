@@ -1,0 +1,56 @@
+.radio-field {
+    position: relative;
+    flex-direction: column;
+    display: flex;
+	justify-content: start;
+	align-items: self-start;
+    gap: 1rem;
+
+    @media (min-width: $responsive-md) {
+		flex-direction: row;
+        align-items: center;   
+        gap: 1.5rem;
+	}
+
+    &__input {
+        font-family: $inter;
+        font-weight: $font-medium;
+        color: $ghost;
+        display: grid;
+        grid-template-columns: 1em auto;
+        gap: 0.5em;
+        cursor: pointer;
+
+        input[type="radio"] {
+            display: grid;
+            place-content: center;
+            appearance: none;
+            background-color: #fff;
+            margin: 0;
+            font: inherit;
+            color: currentcolor;
+            width: 1.15em;
+            height: 1.15em;
+            border: 0.15em solid $borderSecondary;
+            border-radius: 50%;
+
+            &::before {
+                content: "";
+                width: 0.65em;
+                height: 0.65em;
+                border-radius: 50%;
+                transform: scale(0);
+                transition: 120ms transform ease-in-out;
+                box-shadow: inset 1em 1em $colorSecondary;
+            }
+
+            &:checked::before {
+                transform: scale(1);
+            }
+        }
+    }
+
+    .checked {
+        color: $darkGray;
+    }
+}

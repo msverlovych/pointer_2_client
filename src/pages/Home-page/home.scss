@@ -1,0 +1,51 @@
+.search {
+	padding: 1.5rem 0;
+
+	@media (min-width: $responsive-lg) {
+		padding: 2rem 0;
+	}
+
+	&-promo {
+		padding: 0 0.5rem;
+		text-align: center;
+	}
+
+	.search-field {
+		margin-top: 2rem;
+		flex-direction: column;
+		display: flex;
+		align-items: center;
+		gap: 12px;
+
+		@media (max-width: $responsive-sm) {
+			margin-top: 3rem;
+		}
+
+		@media (min-width: $responsive-lg) {
+			gap: 0.5rem;
+			padding: 1rem;
+			flex-direction: row;
+			justify-content: space-between;
+		}
+	}
+}
+
+.posts {
+	padding: 1.5rem 0 4rem 0;
+
+	&-block {
+		max-width: 100%;
+		width: auto;
+		gap: 12px;
+
+		.grid-wrapper {
+			gap: 12px;
+			
+			@include grid-columns;
+		}
+	}
+
+	.load-more {
+		margin: 5rem 0;
+	}
+}

@@ -1,0 +1,16 @@
+.loader {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: $darkGray;
+    fill: $colorTheme;
+
+    .animate-spin {
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+}
