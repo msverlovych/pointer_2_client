@@ -54,7 +54,7 @@ const HomePage: FC = (): ReactElement => {
         }
     }, [searchResults])
 
-    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => setValue('searchedText', event.target.value)
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => setValue('searchedText', event.target.value)    
 
     if (isPostsError) {
         toast.error(postsError.code === 'ERR_NETWORK' ? NETWORK_CONNECTION_ERROR : postsError?.response?.data?.message)

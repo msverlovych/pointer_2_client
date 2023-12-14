@@ -45,6 +45,13 @@
 	font-weight: $font-extraBold;
 	line-height: 2.8rem !important;
 	text-transform: uppercase;
+	background: $mainTitleGradient;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-position: -50px -90px;
+    background-size: 200% 100%;
+    color: transparent !important;
 
 	@media (min-width: $responsive-md) {
 		letter-spacing: 0.4rem;

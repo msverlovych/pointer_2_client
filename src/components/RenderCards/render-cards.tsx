@@ -7,7 +7,7 @@ import { IRenderCards } from "../../types/component-types.ts"
 const RenderCards: FC<IRenderCards> = ({ data, title }): ReactElement => {
     const [ hoveredImage, setHoveredImage ] = useState<string | null>(null)
     const handleMouseOver = (image: string) => setHoveredImage(image)
-    const handleMouseOut = () => setHoveredImage(null)
+    const handleMouseOut = () => setHoveredImage(null)    
 
     if (data.length > 0) {
         return (
@@ -22,7 +22,12 @@ const RenderCards: FC<IRenderCards> = ({ data, title }): ReactElement => {
                             className="card"
                             onMouseOut={handleMouseOut}
                         >
-                            <img className="card-image" src={image} alt={prompt}/>
+                            <img 
+                                className="card-image" 
+                                src={image} 
+                                alt={prompt} 
+                                loading='lazy'
+                            />
                             {activeImage && (
                                 <div className="card-content">
                                     <Htag level={2} className="card-content__title prompt">{prompt}</Htag>

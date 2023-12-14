@@ -33,19 +33,31 @@ const PostPage: FC = (): ReactElement => {
     const watchedValues = watch()
     const { image, prompt, size } = getValues()
 
-    const { mutateAsync: createNewPost, isPending: isLoadingPost } = queries.useCreatePost()
-    const { mutateAsync: generateImageMutation, isPending: isImageLoading } = queries.useGenerateImage()
+    const { 
+        mutateAsync: createNewPost, 
+        isPending: isLoadingPost,
+        isError: isCreatePostError,
+        error: createPostError
+    } = queries.useCreatePost()
+
+    const { 
+        mutateAsync: generateImageMutation, 
+        isPending: isImageLoading, 
+        isError: isGenerateImageEror, 
+        error: generateImageError
+    } = queries.useGenerateImage()
+    
 
     const generateImage = async () => {
-        if (watchedValues.prompt !== '') {
-            try {
-                const data = await generateImageMutation({ prompt: watchedValues.prompt, size: watchedValues.size })
-                setValue('image', `data:image/jpeg;base64,${data.image}`, { shouldValidate: true })
-                toast.success(GENERATED_IMAGE_SUCCESS)
-            } catch (error: any) {
-                setValue('image', error.response.data.image, )
+        if (watchedValues.prompt) {
+            const data = await generateImageMutation({ prompt: watchedValues.prompt, size: watchedValues.size })
+            setValue('image', `data:image/jpeg;base64,${data.image}`, { shouldValidate: true })
+            toast.success(GENERATED_IMAGE_SUCCESS)
+
+            if (isGenerateImageEror) {
+                setValue('image', generateImageError?.response?.data.image )
                 reset({ userName: '', prompt: '' })
-                toast.error(error.response.data.message)
+                toast.error(generateImageError?.response?.data.message)
             }
         } else {
             toast.error(ENTER_PROMPT_ERROR)
@@ -55,14 +67,13 @@ const PostPage: FC = (): ReactElement => {
     const Submit: SubmitHandler<ICreatePostDto> = async data => {
         if (prompt && image) {
             const { userName, prompt, image } = data
+            await createNewPost({ userName, prompt, image })
+            toast.success(IMAGE_SUCCESSFULLY_CREATED)
+            navigate('/')
 
-            try {
-                await createNewPost({ userName, prompt, image })
-                toast.success(IMAGE_SUCCESSFULLY_CREATED)
-                navigate('/')
-            } catch (error: any) {
-                toast.error(error.response.data.message)
-            } 
+            if (isCreatePostError) {
+                toast.error(createPostError?.response?.data.message)
+            }
         } else {
             toast.error(CREATE_POST_ERROR)
         }
