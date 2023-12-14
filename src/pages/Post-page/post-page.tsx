@@ -1,4 +1,4 @@
-import { FC, Fragment, ReactElement } from 'react'
+import { FC, useEffect, Fragment, ReactElement } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Htag, Paragraph, FormField, ButtonPrimary, Loader, ButtonSecondary, ButtonOutline, RadioField } from '../../components'
@@ -53,12 +53,6 @@ const PostPage: FC = (): ReactElement => {
             const data = await generateImageMutation({ prompt: watchedValues.prompt, size: watchedValues.size })
             setValue('image', `data:image/jpeg;base64,${data.image}`, { shouldValidate: true })
             toast.success(GENERATED_IMAGE_SUCCESS)
-
-            if (isGenerateImageEror) {
-                setValue('image', generateImageError?.response?.data.image )
-                reset({ userName: '', prompt: '' })
-                toast.error(generateImageError?.response?.data.message)
-            }
         } else {
             toast.error(ENTER_PROMPT_ERROR)
         }
@@ -70,14 +64,21 @@ const PostPage: FC = (): ReactElement => {
             await createNewPost({ userName, prompt, image })
             toast.success(IMAGE_SUCCESSFULLY_CREATED)
             navigate('/')
-
-            if (isCreatePostError) {
-                toast.error(createPostError?.response?.data.message)
-            }
         } else {
             toast.error(CREATE_POST_ERROR)
         }
     }
+
+    useEffect(() => {
+        if (isGenerateImageEror) {
+            setValue('image', generateImageError?.response?.data.image )
+            reset({ userName: '', prompt: '' })
+            toast.error(generateImageError?.response?.data.message)
+        } else if (isCreatePostError) {
+            toast.error(createPostError?.response?.data.message)
+        }
+    }, [generateImageError, createPostError])
+    
 
     return (
         <section className='post'>

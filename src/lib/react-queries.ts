@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation, useQueryClient, useInfiniteQuery, useQuery, Register } from '@tanstack/react-query'
 import { ICreatePostDto, IGenerateImageDto } from '../types/api-types'
 import { postApi } from '../api'
