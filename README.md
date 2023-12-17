@@ -41,7 +41,7 @@ Welcome to the Pointer web applicationr, an open platform where you can easily g
    npm install or npm install --legacy-peer-deps
 3. Configure environment variables. Create a .env file in the root directory with the following variables:
 - **VITE_BASE_URL_DEV=** http://localhost:3000/api/v1
-2. Run application:
+4. Run application:
    ```bash 
    npm run dev
   
