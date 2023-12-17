@@ -8,6 +8,7 @@ import Loader from "./Loader"
 import RenderCards from "./RenderCards/render-cards"
 import RadioField from "./RadioField"
 import Footer from "./Footer"
+import MetaData from "./Metadata"
 
 export {
     Navbar,
@@ -22,5 +23,6 @@ export {
     RenderCards,
     RadioField,
     ButtonOutline,
-    Footer
+    Footer,
+    MetaData
 }

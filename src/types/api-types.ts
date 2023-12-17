@@ -7,7 +7,11 @@ export interface IPost {
     _id: string,
     userName: string,
     prompt: string,
-    image: string,
+    image: {
+        url: string,
+        height: number,
+        width: number
+    },
     createdAt: string
 }
 

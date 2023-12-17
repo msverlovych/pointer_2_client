@@ -3,6 +3,7 @@ import { Htag, IconButton } from '..'
 import { DownloadSvg } from '../../lib/utils/svg-exports'
 import { downloadImage } from '../../lib/utils'
 import { IRenderCards } from "../../types/component-types.ts"
+import { format } from 'date-fns'
 
 const RenderCards: FC<IRenderCards> = ({ data, title }): ReactElement => {
     const [ hoveredImage, setHoveredImage ] = useState<string | null>(null)
@@ -12,21 +13,23 @@ const RenderCards: FC<IRenderCards> = ({ data, title }): ReactElement => {
     if (data.length > 0) {
         return (
             <Fragment>
-                {data.map(({ _id, userName, image, prompt }) => {
-                    const activeImage = hoveredImage === image
+                {data.map(({ _id, userName, image, prompt, createdAt }) => {
+                    const activeImage = hoveredImage === image.url
+                    const date = format(new Date(createdAt), 'yyyy-MM-dd')
 
                     return (
                         <div
                             key={_id}
-                            onMouseOver={() => handleMouseOver(image)}
+                            onMouseOver={() => handleMouseOver(image.url)}
                             className="card"
                             onMouseOut={handleMouseOut}
                         >
                             <img 
                                 className="card-image" 
-                                src={image} 
-                                alt={prompt} 
-                                loading='lazy'
+                                src={image.url} 
+                                height={image.height}
+                                width={image.width}
+                                alt={prompt}
                             />
                             {activeImage && (
                                 <div className="card-content">
@@ -34,13 +37,13 @@ const RenderCards: FC<IRenderCards> = ({ data, title }): ReactElement => {
                                     <div className="flex flex-between items-center gap-2">
                                         <div className="flex items-center gap-05">
                                             <div className="card-content__label">{userName[0]}</div>
-                                            <span className="card-content__username">{userName}</span>
+                                            <span className="card-content__username">{date}</span>
                                         </div>
                                         <IconButton
                                             icon={DownloadSvg}
                                             path='#'
                                             alt='download'
-                                            onClick={() => downloadImage(_id, image)}
+                                            onClick={() => downloadImage(_id, image.url)}
                                             ariaLabel='download-button'
                                             className='block'
                                         />

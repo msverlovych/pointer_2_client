@@ -79,6 +79,16 @@ export interface IRadioField<T extends FieldValues> extends InputHTMLAttributes<
 export type TRadioOptions = Array<{ name: string, value?: string }>
 
 export interface IRenderCards {
-  data: IPost[] | [],
+  data: IPost[],
   title: string
+}
+
+export type TMetaData = {
+  title: string,
+  description: string,
+  ogTitle: string,
+  ogDescription: string,
+  ogUrl: string,
+  ogImage: string,
+  canonicalLink?: string
 }

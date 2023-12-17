@@ -1,7 +1,7 @@
 import { FC, useEffect, Fragment, ReactElement } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Htag, Paragraph, FormField, ButtonPrimary, Loader, ButtonSecondary, ButtonOutline, RadioField } from '../../components'
+import { Htag, Paragraph, FormField, ButtonPrimary, Loader, ButtonSecondary, ButtonOutline, RadioField, MetaData } from '../../components'
 import { GENERATED_IMAGE_SUCCESS, ENTER_PROMPT_ERROR, IMAGE_SUCCESSFULLY_CREATED, CREATE_POST_ERROR } from '../../constants'
 import { ProfileSvg, TextSvg, PreviewImageSvg } from '../../lib/utils/svg-exports'
 import { PostFormSchema } from '../../lib/utils/form-validation'
@@ -81,55 +81,109 @@ const PostPage: FC = (): ReactElement => {
     
 
     return (
-        <section className='post'>
-            <div className='flex flex-center items-center'>
-                <div className="container">
-                    <div className='post-promo'>
-                        <Htag level={1} color='primary' className="main-title post-promo__title">CREATE</Htag>
-                        <Paragraph size='large' className='main-subtitle post-promo__subtitle'>
-                            Generate an imaginative image through&nbsp; 
-                            <span id='accent-color'>
-                                DALL-E AI
-                            </span> and share it with the community
-                        </Paragraph>
-                    </div>
-                    <div className='post-block'>
-                        <form className='form' onSubmit={handleSubmit(Submit)}>
-                            <FormField
-                                type="text"
-                                register={register}
-                                name='userName'
-                                label="User Name"
-                                icon={ProfileSvg}
-                                errorMessage={errors?.userName?.message}
-                                placeholder="Ex., Max"
-                                inputMode='text'
-                                ariaInvalid={!!errors.userName}
-                                maxLength={101}
-                                autoComplete="off"
-                                required
-                            />
-                            <FormField
-                                type="text"
-                                register={register}
-                                name="prompt"
-                                label="Prompt"
-                                icon={TextSvg}
-                                errorMessage={errors?.prompt?.message}
-                                placeholder="A crazy cat is playing video-game..."
-                                inputMode='text'
-                                ariaInvalid={!!errors.prompt}
-                                maxLength={301}
-                                autoComplete="off"
-                                required
-                            />
-                            <RadioField
-                                register={register}
-                                name='size'
-                                defaultValue={size}
-                                options={ImageDataSizes}
-                            />
-                            <div className="preview-image mobile">
+        <Fragment>
+            <MetaData
+                title="Post Page"
+                description="Feel free to create a post with generated Open AI image and assigned prompt"
+                ogTitle="Create"
+                ogDescription="Generate an imaginative image through DALL-E AI and share it with the community"
+                ogUrl="https://pointer.com/create-post"
+                ogImage="https://res.cloudinary.com/bandmsociety/image/upload/v1701705252/pointer/store/p4qlq9czsxmefgq0cyup.webp"
+                canonicalLink="/create-post"
+            />
+            <section className='post'>
+                <div className='flex flex-center items-center'>
+                    <div className="container">
+                        <div className='post-promo'>
+                            <Htag level={1} color='primary' className="main-title post-promo__title">CREATE</Htag>
+                            <Paragraph size='large' className='main-subtitle post-promo__subtitle'>
+                                Generate an imaginative image through&nbsp; 
+                                <span id='accent-color'>
+                                    DALL-E AI
+                                </span> and share it with the community
+                            </Paragraph>
+                        </div>
+                        <div className='post-block'>
+                            <form className='form' onSubmit={handleSubmit(Submit)}>
+                                <FormField
+                                    type="text"
+                                    register={register}
+                                    name='userName'
+                                    label="User Name"
+                                    icon={ProfileSvg}
+                                    errorMessage={errors?.userName?.message}
+                                    placeholder="Ex., Max"
+                                    inputMode='text'
+                                    ariaInvalid={!!errors.userName}
+                                    maxLength={101}
+                                    autoComplete="off"
+                                    required
+                                />
+                                <FormField
+                                    type="text"
+                                    register={register}
+                                    name="prompt"
+                                    label="Prompt"
+                                    icon={TextSvg}
+                                    errorMessage={errors?.prompt?.message}
+                                    placeholder="A crazy cat is playing video-game..."
+                                    inputMode='text'
+                                    ariaInvalid={!!errors.prompt}
+                                    maxLength={301}
+                                    autoComplete="off"
+                                    required
+                                />
+                                <RadioField
+                                    register={register}
+                                    name='size'
+                                    defaultValue={size}
+                                    options={ImageDataSizes}
+                                />
+                                <div className="preview-image mobile">
+                                    <Fragment>
+                                        {image ? (
+                                            <img
+                                                src={image}
+                                                alt={watchedValues.prompt}
+                                                className="preview-image__success"
+                                            />
+                                        ) : (
+                                            <img
+                                                width={250}
+                                                height={250}
+                                                src={PreviewImageSvg}
+                                                alt="preview"
+                                                className="preview-image__unload"
+                                            />
+                                        )}
+                                        {isImageLoading && (
+                                            <div className="preview-image__loading">
+                                                <Loader />
+                                            </div>
+                                        )}
+                                    </Fragment>
+                                </div>
+                                <div className='post-block__submit'>
+                                    {image ? (
+                                        <ButtonOutline type="button" onClick={() => reset()}>
+                                            Reset
+                                        </ButtonOutline>
+                                    ) : (
+                                        <ButtonSecondary type="button" onClick={generateImage} disabled={isImageLoading}>
+                                            {isImageLoading ? 'Generating...' : 'Generate image'}
+                                        </ButtonSecondary>
+                                    )}
+                                </div>
+                                <div className='post-block__submit'>
+                                    <small>
+                                        ** Once you have created the image you want, you can share it with others in the community **
+                                    </small>
+                                    <ButtonPrimary type="submit" disabled={!isValid || isSubmitting}>
+                                        {isLoadingPost ? 'Creating...' : 'Create'}
+                                    </ButtonPrimary>
+                                </div>
+                            </form>
+                            <div className="preview-image desktop">
                                 <Fragment>
                                     {image ? (
                                         <img
@@ -153,54 +207,11 @@ const PostPage: FC = (): ReactElement => {
                                     )}
                                 </Fragment>
                             </div>
-                            <div className='post-block__submit'>
-                                {image ? (
-                                    <ButtonOutline type="button" onClick={() => reset()}>
-                                        Reset
-                                    </ButtonOutline>
-                                ) : (
-                                    <ButtonSecondary type="button" onClick={generateImage} disabled={isImageLoading}>
-                                        {isImageLoading ? 'Generating...' : 'Generate image'}
-                                    </ButtonSecondary>
-                                )}
-                            </div>
-                            <div className='post-block__submit'>
-                                <small>
-                                    ** Once you have created the image you want, you can share it with others in the community **
-                                </small>
-                                <ButtonPrimary type="submit" disabled={!isValid || isSubmitting}>
-                                    {isLoadingPost ? 'Creating...' : 'Create'}
-                                </ButtonPrimary>
-                            </div>
-                        </form>
-                        <div className="preview-image desktop">
-                            <Fragment>
-                                {image ? (
-                                    <img
-                                        src={image}
-                                        alt={watchedValues.prompt}
-                                        className="preview-image__success"
-                                    />
-                                ) : (
-                                    <img
-                                        width={250}
-                                        height={250}
-                                        src={PreviewImageSvg}
-                                        alt="preview"
-                                        className="preview-image__unload"
-                                    />
-                                )}
-                                {isImageLoading && (
-                                    <div className="preview-image__loading">
-                                        <Loader />
-                                    </div>
-                                )}
-                            </Fragment>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </Fragment>
     )
 }
 
