@@ -2,7 +2,7 @@ import axios from "axios"
 import { IOpenAImageResponse, IPostResponse, ICreatePostDto, IGenerateImageDto } from "../types/api-types"
 
 const _instance = axios.create({
-    baseURL: import.meta.env.VITE_BASE_URL_DEV,
+    baseURL: import.meta.env.VITE_BASE_URL_PROD,
     headers: {
         'Content-Type': 'application/json'
     }
