@@ -14,8 +14,10 @@ const RenderCards: FC<IRenderCards> = ({ data, title }): ReactElement => {
         return (
             <Fragment>
                 {data.map(({ _id, userName, image, prompt, createdAt }) => {
+                    const widths = [400, 800, 1200]
                     const activeImage = hoveredImage === image.url
                     const date = format(new Date(createdAt), 'yyyy-MM-dd')
+                    const srcSet = widths.map(width => `${image.url.replace('/upload', `/upload/w_${width}`)} ${width}w`).join(', ')
 
                     return (
                         <div
@@ -26,9 +28,12 @@ const RenderCards: FC<IRenderCards> = ({ data, title }): ReactElement => {
                         >
                             <img 
                                 className="card-image" 
-                                src={image.url} 
                                 height={image.height}
                                 width={image.width}
+                                src={image.url} 
+                                srcSet={srcSet}
+                                sizes='50vw'
+                                loading='lazy'
                                 alt={prompt}
                             />
                             {activeImage && (

@@ -1,11 +1,9 @@
 import { FC, useEffect, useState, Fragment, ReactElement, ChangeEvent } from "react"
 import { FormField, Htag, Paragraph, RenderCards, Loader, ButtonOutline, MetaData } from "../../components"
 import { NETWORK_CONNECTION_ERROR, NO_POSTS_FOUND_ERROR, NO_SEARCH_RESULTS_ERROR } from '../../constants'
-import { SearchFormSchema } from "../../lib/utils/form-validation"
 import { TSearchFormDto, IPost } from "../../types/api-types"
 import { useForm } from "react-hook-form"
 import { SearchSvg } from "../../lib/utils/svg-exports"
-import { yupResolver } from "@hookform/resolvers/yup"
 import toast from 'react-hot-toast'
 import { queries } from "../../lib/react-queries"
 import { useDebounce } from "../../hooks/useDebounce.ts"
@@ -18,7 +16,6 @@ const HomePage: FC = (): ReactElement => {
         formState: {errors }
     } = useForm<TSearchFormDto>({
         defaultValues: { searchedText: '' },
-        resolver: yupResolver(SearchFormSchema),
         mode: 'onChange'
     })
 
