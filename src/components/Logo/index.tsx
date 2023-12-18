@@ -12,7 +12,9 @@ const LogoSizes: LogoSizeType = {
 const Logo: FC<MainLogoProps> = ({ size = 'medium', className }): ReactElement => (
     <img 
         src={LogoSvg} 
-        alt='Main Logo' 
+        alt='Main Logo'
+        height={200}
+        width={200} 
         className={cn(className, 'main-logo', `main-logo${size && LogoSizes[size]}`)}
     />
 )

@@ -33,7 +33,6 @@ const RenderCards: FC<IRenderCards> = ({ data, title }): ReactElement => {
                                 src={image.url} 
                                 srcSet={srcSet}
                                 sizes='50vw'
-                                loading='lazy'
                                 alt={prompt}
                             />
                             {activeImage && (
