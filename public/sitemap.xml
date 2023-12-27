@@ -7,12 +7,12 @@
 
 
 <url>
-  <loc>https://pointer.com/</loc>
+  <loc>https://pointer-2-client.vercel.app</loc>
   <lastmod>2023-12-17T00:02:35+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://yuliannakhomenko.com/create-post</loc>
+  <loc>https://pointer-2-client.vercel.app/create-post</loc>
   <lastmod>2023-12-17T00:02:35+00:00</lastmod>
   <priority>0.80</priority>
 </url>

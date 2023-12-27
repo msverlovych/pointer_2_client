@@ -26,6 +26,9 @@ const PostPage: FC = (): ReactElement => {
         mode: 'onChange', 
         resolver: yupResolver(PostFormSchema),
         defaultValues: {
+            userName: '',
+            prompt: '',
+            image: '',
             size: ImageDataSizes[0].value
         }
     }) 
@@ -43,7 +46,7 @@ const PostPage: FC = (): ReactElement => {
     const { 
         mutateAsync: generateImageMutation, 
         isPending: isImageLoading, 
-        isError: isGenerateImageEror, 
+        isError: isGenerateImageError, 
         error: generateImageError
     } = queries.useGenerateImage()
     
@@ -70,14 +73,16 @@ const PostPage: FC = (): ReactElement => {
     }
 
     useEffect(() => {
-        if (isGenerateImageEror) {
-            setValue('image', generateImageError?.response?.data.image )
-            reset({ userName: '', prompt: '' })
+        if (isGenerateImageError) {
+            console.log(isGenerateImageError)
+            reset({ size: size, image: generateImageError?.response?.data?.image })
             toast.error(generateImageError?.response?.data.message)
+
+            console.log(image)
         } else if (isCreatePostError) {
             toast.error(createPostError?.response?.data.message)
         }
-    }, [generateImageError, createPostError])
+    }, [isGenerateImageError, isCreatePostError])
     
 
     return (
@@ -87,9 +92,8 @@ const PostPage: FC = (): ReactElement => {
                 description="Feel free to create a post with generated Open AI image and assigned prompt"
                 ogTitle="Create"
                 ogDescription="Generate an imaginative image through DALL-E AI and share it with the community"
-                ogUrl="https://pointer.com/create-post"
+                ogUrl="https://pointer-2-client.vercel.app/create-post"
                 ogImage="https://res.cloudinary.com/bandmsociety/image/upload/v1701705252/pointer/store/p4qlq9czsxmefgq0cyup.webp"
-                canonicalLink="/create-post"
             />
             <section className='post'>
                 <div className='flex flex-center items-center'>
@@ -144,7 +148,7 @@ const PostPage: FC = (): ReactElement => {
                                         {image ? (
                                             <img
                                                 src={image}
-                                                alt={watchedValues.prompt}
+                                                alt={prompt}
                                                 className="preview-image__success"
                                             />
                                         ) : (
