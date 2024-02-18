@@ -74,11 +74,8 @@ const PostPage: FC = (): ReactElement => {
 
     useEffect(() => {
         if (isGenerateImageError) {
-            console.log(isGenerateImageError)
             reset({ size: size, image: generateImageError?.response?.data?.image })
             toast.error(generateImageError?.response?.data.message)
-
-            console.log(image)
         } else if (isCreatePostError) {
             toast.error(createPostError?.response?.data.message)
         }

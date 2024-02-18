@@ -6,7 +6,7 @@ import { Toaster } from "react-hot-toast"
 const HomeLayout: FC = (): ReactElement => {
     return (
         <Fragment>
-            <header className="header">
+            <header>
                 <Navbar />
             </header>
             <main id="main" className="w-full">
